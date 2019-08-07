@@ -118,12 +118,6 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.8.5</version>
         </dependency>
-<!--implemnetacion del jar para extraer dolar del banco de mexico-->
-        <dependency>
-<groupId>com.DolarWS</groupId>
-            <artifactId>DolarWS</artifactId>
-            <version>1.0</version>
-            </dependency>
     </dependencies>
 
     <build>
