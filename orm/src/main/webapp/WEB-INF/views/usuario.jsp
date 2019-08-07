@@ -1,7 +1,7 @@
 <%-- 
     Document   : usuario
     Created on : 4/11/2017, 09:53:30 AM
-    Author     : Jasmin Santana
+    Author     : Daniel Loza 
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
