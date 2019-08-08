@@ -6,10 +6,12 @@
 package com.soma.sgc.controller;
 
 
+import com.soma.sgc.model.CatalogoTaller;
 import java.net.UnknownHostException;
 
 import com.soma.sgc.model.RolUsuario;
 import com.soma.sgc.model.Usuario;
+import com.soma.sgc.service.CatalogoTallerService;
 
 
 import com.soma.sgc.service.RolService;
@@ -47,8 +49,8 @@ public class ControllerUsuario {
     //Bitacora bita = new Bitacora();
     @Autowired
     UsuarioService usuarioService;
-    
-   
+    @Autowired
+    CatalogoTallerService catalogoTallerService;
     @Autowired
     RolService rolService;
 
@@ -92,9 +94,11 @@ public class ControllerUsuario {
     model.addAttribute("user",usuarioEnSesion());
         if (!estaUsuarioAnonimo()) {            
             List<Usuario> lUsuario = usuarioService.showUsuario();
+            List<CatalogoTaller> lTaller = catalogoTallerService.showTaller();
+            List<RolUsuario> lRol = rolService.showRol();
             // enviar los datos JSP
             model.addAttribute("lUsuario", lUsuario);
-            List<RolUsuario> lRol = rolService.showRol();
+            model.addAttribute("lTaller", lTaller);
             model.addAttribute("lRol", lRol);
             return "usuario";
         }
