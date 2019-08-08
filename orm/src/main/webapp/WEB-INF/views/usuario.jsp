@@ -39,6 +39,7 @@
                                         <th>Correo Electronico</th>
                                         <th style="display:none">IDrol</th>
                                         <th>Rol</th>
+                                        <th>Taller</th>
                                         <th style="display:none">IDEstatus</th>
                                         <th>Actualizar</th>
                                         <th>Eliminar</th>
@@ -54,6 +55,8 @@
                                             <td>${usuario.correoelectronico}</td>
                                             <td style="display:none">${usuario.rol.rolid}</td>
                                             <td>${usuario.rol.nombre}</td>
+                                            <td style="display:none">${usuario.idtaller.idtaller}</td>
+                                            <td>${usuario.idtaller.nombre}</td>
                                             <td><button id="mostrarU" onclick="mostrarUsuario();" data-toggle="modal" data-target="#myModal" class="btn btn-warning">
                                                     <span class="glyphicon glyphicon-pencil"></span> </button></td>
                                             <!-- Eliminar -->
@@ -112,7 +115,16 @@
                                         <option value="${rol.rolid}">${rol.nombre} </option>
                                     </c:forEach>
                                 </select>                                            
-                            </div>                                       
+                            </div>   
+                            <div class="col-sm-4">
+                                <!-- consulta catalogo -->
+                                <select id="roltaller" class="form-control">
+                                    <option value="0">Seleccione Taller</option>
+                                    <c:forEach items="${lTaller}" var="taller">
+                                        <option value="${taller.idtaller}">${taller.nombre} </option>
+                                    </c:forEach>
+                                </select>                                            
+                            </div>  
                             <div class="col-sm-10">
                                 <input type="text"  style="display:none" class="form-control" id="idusuario" >
                             </div>
