@@ -14,10 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
-/**
- *
- * @author estadias2017-2
- */
 @Entity
 @Table(name = "rolusuario")
 public class RolUsuario implements Serializable {

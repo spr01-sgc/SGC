@@ -88,6 +88,4 @@ public class Usuario implements Serializable {
     public String toString() {
         return "Usuario{" + "usuarioid=" + usuarioid + ", nickname=" + nickname + ", pass=" + pass + ", correoelectronico=" + correoelectronico + ", rol=" + rol + '}';
     }
-
-  
 }
