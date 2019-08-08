@@ -11,7 +11,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-        <title>ORM Sprint Boot</title>
+        <title>SGC</title>
         <link href="<c:url value='/assets/css/iconic.css'/>" rel="stylesheet" />
         <link href="<c:url value='/assets/css/style.css'/>" rel="stylesheet" />
         <script src="<c:url value= '/assets/js/prefix-free.js'/>" type="text/javascript"></script>
@@ -44,7 +44,7 @@
         <script src="<c:url value= '/assets/js/xlsx.js'/>" type="text/javascript"></script>
         <script src="<c:url value= '/assets/js/xlsx.full.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value= '/assets/js/jszip.js'/>" type="text/javascript"></script>
-        <script src="../../assets/js/pages/index1.js" type="text/javascript"></script>
+       
        
          <style type="text/css">
             li.dropdown1 > a > span {

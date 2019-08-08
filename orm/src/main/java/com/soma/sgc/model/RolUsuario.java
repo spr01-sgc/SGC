@@ -45,7 +45,4 @@ public class RolUsuario implements Serializable {
     public String toString() {
         return "RolUsuario{" + "rolid=" + rolid + ", nombre=" + nombre + '}';
     }
-
-  
-
 }
