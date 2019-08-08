@@ -35,4 +35,8 @@ public class ProduccionVaceado {
     @ManyToOne
     @ForeignKey(name = "idcodigobarras_fk")
     private CodigoBarras codigoBarras;
+    
+     @ManyToOne
+    @ForeignKey(name = "idmolde_fk")
+    private CatalogoMoldes idmolde;
 }

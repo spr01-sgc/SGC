@@ -21,19 +21,46 @@ import org.hibernate.annotations.ForeignKey;
 @Entity
 @Table(name = "produccionPulido")
 public class ProduccionPulido {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idproduccionp")
     private Integer idproduccionp;
-       
 
-   //Establece relacion con Empleado
+    //Establece relacion con Empleado
     @ManyToOne
     @ForeignKey(name = "idempleado_fk")
     private Empleado empleado;
-    
+
     //Establece relacion con ProduccionVaceado
     @ManyToOne
     @ForeignKey(name = "idproduccionv_fk")
     private ProduccionVaceado produccionVaceado;
+
+    public Integer getIdproduccionp() {
+        return idproduccionp;
+    }
+
+    public void setIdproduccionp(Integer idproduccionp) {
+        this.idproduccionp = idproduccionp;
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+
+    public ProduccionVaceado getProduccionVaceado() {
+        return produccionVaceado;
+    }
+
+    public void setProduccionVaceado(ProduccionVaceado produccionVaceado) {
+        this.produccionVaceado = produccionVaceado;
+    }
+    
+    
+    
 }

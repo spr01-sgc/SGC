@@ -43,6 +43,9 @@ public class Usuario implements Serializable {
     @ManyToOne
     @ForeignKey(name = "rolid_fk")
     private RolUsuario rol;
+       @ManyToOne
+    @ForeignKey(name = "idtaller_fk")
+    private CatalogoTaller idtaller;
 
     public Integer getUsuarioid() {
         return usuarioid;
@@ -84,8 +87,19 @@ public class Usuario implements Serializable {
         this.rol = rol;
     }
 
+    public CatalogoTaller getIdtaller() {
+        return idtaller;
+    }
+
+    public void setIdtaller(CatalogoTaller idtaller) {
+        this.idtaller = idtaller;
+    }
+
     @Override
     public String toString() {
-        return "Usuario{" + "usuarioid=" + usuarioid + ", nickname=" + nickname + ", pass=" + pass + ", correoelectronico=" + correoelectronico + ", rol=" + rol + '}';
+        return "Usuario{" + "usuarioid=" + usuarioid + ", nickname=" + nickname + ", pass=" + pass + ", correoelectronico=" + correoelectronico + ", rol=" + rol + ", idtaller=" + idtaller + '}';
     }
+    
+
+ 
 }

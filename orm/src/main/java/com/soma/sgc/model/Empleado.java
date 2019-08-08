@@ -46,17 +46,19 @@ public class Empleado implements Serializable {
 
     @Column(name = "serie")
     private String serie;
-    
+
     @Column(name = "estatus")
     private Integer estatus;
-    
+
     @Column(name = "fechaestatus")
     private Date fechaestatus;
 
     //Establece relacion con CatalogoTaller
     @ManyToOne
     @ForeignKey(name = "idtaller_fk")
-    private CatalogoTaller catalogoTaller;
+    private CatalogoTaller idtaller;
+    //relacion con los moldes
+  
 
     public Integer getIdempleado() {
         return idempleado;
@@ -130,17 +132,22 @@ public class Empleado implements Serializable {
         this.fechaestatus = fechaestatus;
     }
 
-    public CatalogoTaller getCatalogoTaller() {
-        return catalogoTaller;
+    public CatalogoTaller getIdtaller() {
+        return idtaller;
     }
 
-    public void setCatalogoTaller(CatalogoTaller catalogoTaller) {
-        this.catalogoTaller = catalogoTaller;
+    public void setIdtaller(CatalogoTaller idtaller) {
+        this.idtaller = idtaller;
     }
 
     @Override
     public String toString() {
-        return "Empleado{" + "idempleado=" + idempleado + ", nombre=" + nombre + ", app=" + app + ", apm=" + apm + ", puesto=" + puesto + ", descripcion=" + descripcion + ", serie=" + serie + ", estatus=" + estatus + ", fechaestatus=" + fechaestatus + ", catalogoTaller=" + catalogoTaller + '}';
+        return "Empleado{" + "idempleado=" + idempleado + ", nombre=" + nombre + ", app=" + app + ", apm=" + apm + ", puesto=" + puesto + ", descripcion=" + descripcion + ", serie=" + serie + ", estatus=" + estatus + ", fechaestatus=" + fechaestatus + ", idtaller=" + idtaller + '}';
     }
+
+
+
+
+  
 
 }
