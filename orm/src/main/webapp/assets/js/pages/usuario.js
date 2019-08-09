@@ -17,7 +17,7 @@ function mostrarUsuario() {
         //id de usuario a actualizar
         var idusuariT = $('td', this).eq(0).text();
         $("#idusuario").val(idusuariT);
-//informacion del usuario
+        //informacion del usuario
         var nickuserT = $('td', this).eq(2).text();
         $("#nick").val(nickuserT);
         var passuserT = $('td', this).eq(3).text();
@@ -26,6 +26,8 @@ function mostrarUsuario() {
         $("#email").val(emailuserT);
         var roluserT = $('td', this).eq(5).text();
         $("#roluser").val(roluserT);
+        var talleruserT = $('td', this).eq(7).text();
+        $("#roluser").val(talleruserT);
     });
 }
 /*Funcion que elimina un usuario*/
@@ -33,7 +35,6 @@ function eliminarUsuario1() {
     $("#tableUsuario tbody").on('click', 'tr', function () {
         var idusuariT = $('td', this).eq(0).text();
         $("#idusuario").val(idusuariT);
-
         var id = $("#idusuario").val();
         if (id === '') {
             error("NO se ha seleccionado una opci&oacuten");
@@ -114,9 +115,10 @@ function agregarUsuario() {
     var pass = $("#pass").val().trim();
     var email = $("#email").val().trim();
     var rol = $("#roluser").val();
+    var taller = $("#roluser").val();
 
 
-    if (nick === '' || pass === '') {
+    if (nick === '' || pass === '' || email === '' || rol === '' || taller === '' ) {
         error("Hay campos vacios");
         return false;
     }
@@ -133,7 +135,7 @@ function agregarUsuario() {
         }
     }
 
-    var datos = [nick, pass, email, rol];
+    var datos = [nick, pass, email, rol, taller];
     $(document).ajaxSend(function (e, xhr, options) {
         var token = $("input[name='_csrf']").val();
         var cabecera = "X-CSRF-TOKEN";
