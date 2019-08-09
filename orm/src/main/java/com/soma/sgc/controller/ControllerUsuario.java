@@ -5,14 +5,12 @@
  */
 package com.soma.sgc.controller;
 
-
 import com.soma.sgc.model.CatalogoTaller;
 import java.net.UnknownHostException;
 
 import com.soma.sgc.model.RolUsuario;
 import com.soma.sgc.model.Usuario;
 import com.soma.sgc.service.CatalogoTallerService;
-
 
 import com.soma.sgc.service.RolService;
 import com.soma.sgc.service.UsuarioService;
@@ -36,7 +34,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 /**
  * Administra los accesos a los JSP metodos de operacion con el usuario
  *
@@ -58,10 +55,10 @@ public class ControllerUsuario {
     public String initSistema(ModelMap model) throws UnknownHostException {
         if (!estaUsuarioAnonimo()) {
             //bitacoraUsuarioDaoAux.bitacoraUsuario("Login", usuarioEnSesion(), estaUsuarioAnonimo());
-           // verOpeRele(model);
-             InetAddress address = InetAddress.getLocalHost();    
-             address.getHostAddress();
-         Logger.getLogger("IP ").log(Level.INFO, "Tiene IP : "+ address.getHostAddress());
+            // verOpeRele(model);
+            InetAddress address = InetAddress.getLocalHost();
+            address.getHostAddress();
+            Logger.getLogger("IP ").log(Level.INFO, "Tiene IP : " + address.getHostAddress());
             return "index";
         }
 
@@ -91,8 +88,8 @@ public class ControllerUsuario {
      */
     @RequestMapping(value = {"/usuario"}, method = RequestMethod.GET)
     public String usuario(ModelMap model) {
-    model.addAttribute("user",usuarioEnSesion());
-        if (!estaUsuarioAnonimo()) {            
+        model.addAttribute("user", usuarioEnSesion());
+        if (!estaUsuarioAnonimo()) {
             List<Usuario> lUsuario = usuarioService.showUsuario();
             List<CatalogoTaller> lTaller = catalogoTallerService.showTaller();
             List<RolUsuario> lRol = rolService.showRol();
@@ -104,16 +101,17 @@ public class ControllerUsuario {
         }
         return "login";
     }
- @RequestMapping(value = "/usuario/verificarUsuario", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/usuario/verificarUsuario", method = RequestMethod.POST)
     public @ResponseBody
     Usuario verificarUsuario(@RequestParam(value = "datos[]") String datos[]) {
-        Usuario buscarUusuario=null;
-    if (!estaUsuarioAnonimo()) {
-         buscarUusuario=usuarioService.busquedaNinckname(datos[0]); 
+        Usuario buscarUusuario = null;
+        if (!estaUsuarioAnonimo()) {
+            buscarUusuario = usuarioService.busquedaNinckname(datos[0]);
+        }
+        return buscarUusuario;
     }
-    return buscarUusuario;
-    }
-    
+
     /**
      * Metodo para Agregar Usuarios
      *
@@ -132,12 +130,14 @@ public class ControllerUsuario {
             }
 
             RolUsuario lRolUsuario = rolService.buscarNombre(Integer.parseInt(datos[3]));
+            CatalogoTaller lTaller = catalogoTallerService.mostrarNombre(Integer.parseInt(datos[4]));
             // creacion de objeto usuario
             Usuario usuario = new Usuario();
             usuario.setNickname(datos[0]);
             usuario.setPass(datos[1]);
             usuario.setCorreoelectronico(datos[2]);
             usuario.setRol(lRolUsuario);
+            usuario.setIdtaller(lTaller);
 
             if (usuarioService.save(usuario)) {
                 return "exito";
@@ -147,9 +147,8 @@ public class ControllerUsuario {
         }
         return "errorAcceso";
     }
-    
-    //Metodo para actualizar Usuario
 
+    //Metodo para actualizar Usuario
     @RequestMapping(value = "/usuario/actualizarUsuario", method = RequestMethod.POST)
     public @ResponseBody
     String actualizarUsuario(@RequestParam(value = "datos[]") String datos[]) {
@@ -168,16 +167,15 @@ public class ControllerUsuario {
                         usuario.setNickname(datos[0]);
                         usuario.setPass(datos[1]);
                         usuario.setCorreoelectronico(datos[2]);
-                        
+
                         RolUsuario lRolUsuario = rolService.buscarNombre(Integer.parseInt(datos[3]));
-               
+                        CatalogoTaller lTaller = catalogoTallerService.mostrarNombre(Integer.parseInt(datos[4]));
+
                         usuario.setRol(lRolUsuario);
-                     
-                   
-                        
-                  
+                        usuario.setIdtaller(lTaller);
+
                         if (usuarioService.update(usuario)) {
-                          //bitacoraUsuarioDaoAux.bitacoraUsuario("Modificar Usuario", usuarioEnSesion(), estaUsuarioAnonimo());
+                            //bitacoraUsuarioDaoAux.bitacoraUsuario("Modificar Usuario", usuarioEnSesion(), estaUsuarioAnonimo());
                             return "exito";
                         } else {
                             return "error";
@@ -207,25 +205,17 @@ public class ControllerUsuario {
 
             if (!lUsuario.isEmpty()) {
                 for (Usuario usuario : lUsuario) {
-                    //obtiene el id del delitoa a eliminar
+                   
                     int Id = Integer.parseInt(datos[0]);
-                    if (usuario.getUsuarioid() == Integer.parseInt(datos[0])) {
-//                        usuario.setNickname(datos[0]);
-//                        usuario.setPass(datos[1]);
-//                        usuario.setCorreoelectronico(datos[2]);
-//                        RolUsuario lRolUsuario = rolService.buscarNombre(Integer.parseInt(datos[3]));
-//                        usuario.setRol(lRolUsuario);
 
-                        if (usuarioService.delete(Id)) {
-
-                            //bitacoraUsuarioDaoAux.bitacoraUsuario("Eliminar ", usuarioEnSesion(), estaUsuarioAnonimo());
-                            return "exito";
-                        } else {
-                            return "error";
-                        }
+                    if (usuarioService.delete(Id)) {
+                        return "exito";
+                    } else {
+                        return "error";
                     }
-                }//end for|
-            }//si no esta vacia la lista de delitos
+
+                }
+            }
 
         }//el usuario es anonimo
 
@@ -233,8 +223,6 @@ public class ControllerUsuario {
 
     }
 
-    
-    
     //Metodo buscar el usuario en sesion y muestra en pantalla
     @RequestMapping(value = "/usuario/usuarioEnsesion", method = RequestMethod.GET)
     public @ResponseBody
@@ -243,7 +231,7 @@ public class ControllerUsuario {
         String[] usuario = new String[3];
         usuario[0] = lusuario.getNickname();
         usuario[1] = lusuario.getCorreoelectronico();
-        
+
         return usuario;
     }
 //Metodo busca usuario con operacion interna preocupante
@@ -251,12 +239,12 @@ public class ControllerUsuario {
     @RequestMapping(value = "/usuario/buscarUsuarioP", method = RequestMethod.POST)
     public @ResponseBody
     String[] buscarUsuarioP(@RequestParam(value = "datos[]") String datos[]) {
-      Usuario usuario = null;
-        String[] usuarioDatos = new String[3];       
-                usuario = usuarioService.busquedaId(Integer.parseInt(datos[0]));
-                usuarioDatos[0] = usuario.getNickname();
-                usuarioDatos[1] = usuario.getCorreoelectronico();
-                
+        Usuario usuario = null;
+        String[] usuarioDatos = new String[3];
+        usuario = usuarioService.busquedaId(Integer.parseInt(datos[0]));
+        usuarioDatos[0] = usuario.getNickname();
+        usuarioDatos[1] = usuario.getCorreoelectronico();
+
         return usuarioDatos;
 
     }
@@ -266,15 +254,16 @@ public class ControllerUsuario {
     public String bitacoraUsuario(ModelMap model) {
         if (!estaUsuarioAnonimo()) {
             //trae los datos de la tabla 
-           // List<BitaAccionesUsuario> lBitaAcc = bitaAccionesUsuarioService.showBitacora();
+            // List<BitaAccionesUsuario> lBitaAcc = bitaAccionesUsuarioService.showBitacora();
             // enviar los datos JSP
-           // model.addAttribute("lBitaAcc", lBitaAcc);
+            // model.addAttribute("lBitaAcc", lBitaAcc);
 
             return "bitacoraUsuario";
         }
         return "login";
     }
-/*@RequestMapping(value = "/operelevante/notOpRel", method = RequestMethod.GET)
+
+    /*@RequestMapping(value = "/operelevante/notOpRel", method = RequestMethod.GET)
     public //@ResponseBody
     List<Pago> verOpeRele(ModelMap model) {
         List<Pago> lOpre = bitacoraUsuarioDaoAux.notificacionRelevante(5000);
@@ -287,7 +276,8 @@ public class ControllerUsuario {
      */
     public String usuarioEnSesion() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String nicknamePrincipal = null;  String pass = null;
+        String nicknamePrincipal = null;
+        String pass = null;
 
         if (principal instanceof UserDetails) {
             //Es igual al usuario que esta en sesion
@@ -316,10 +306,10 @@ public class ControllerUsuario {
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-       
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            new SecurityContextLogoutHandler().logout(request, response, auth);           
+            new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/login?logout";
     }

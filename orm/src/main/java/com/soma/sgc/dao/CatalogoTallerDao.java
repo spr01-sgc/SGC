@@ -20,7 +20,7 @@ public interface CatalogoTallerDao {
 
     List<CatalogoTaller> showTaller();
     CatalogoTaller busquedaId(int idtaller);
-    
+    CatalogoTaller mostrarNombre(int idtaller);
 
     
 }

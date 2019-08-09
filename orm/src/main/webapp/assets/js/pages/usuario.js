@@ -27,7 +27,7 @@ function mostrarUsuario() {
         var roluserT = $('td', this).eq(5).text();
         $("#roluser").val(roluserT);
         var talleruserT = $('td', this).eq(7).text();
-        $("#roluser").val(talleruserT);
+        $("#roltaller").val(talleruserT);
     });
 }
 /*Funcion que elimina un usuario*/
@@ -115,24 +115,17 @@ function agregarUsuario() {
     var pass = $("#pass").val().trim();
     var email = $("#email").val().trim();
     var rol = $("#roluser").val();
-    var taller = $("#roluser").val();
+    var taller = $("#roltaller").val();
 
 
-    if (nick === '' || pass === '' || email === '' || rol === '' || taller === '' ) {
+    if (nick === '' || pass === '' || email === '' || rol === '' || taller === '') {
         error("Hay campos vacios");
         return false;
     }
     var rolname = $('#roluser').find(":selected").text();
-    if (rolname === "ADMIN") {
-        if (rol === '0') {
-            error("No ha seleccionado una opción");
-            return false;
-        }
-    } else {
-        if (rol === '0') {
-            error("No ha seleccionado una opción");
-            return false;
-        }
+    if (rol === '0' || roltaller === '0') {
+        error("No ha seleccionado una opción");
+        return false;
     }
 
     var datos = [nick, pass, email, rol, taller];
@@ -156,7 +149,7 @@ function agregarUsuario() {
                     alert("Se ha producido un error en el servidor");
                     break;
                 case 'exito':
-                    ok("Los datos se procesarón CORRECTAMENTE!");
+                    alert("Los datos se procesarón CORRECTAMENTE!");
                     setTimeout(function () {
                         location.href = "usuario";
                     }, 1000);
@@ -179,26 +172,21 @@ function actualizarUsuario() {
     var pass = $("#pass").val().trim();
     var email = $("#email").val().trim();
     var rol = $("#roluser").val();
+    var roltaller = $("#roltaller").val();
 
     if (nick === '' || pass === '') {
         error("Hay campos vacios");
         return false;
     }
-    
+
     var rolname = $('#roluser').find(":selected").text();
-    if (rolname === "ADMIN") {
-        if (rol === '0') {
-            error("No ha seleccionado una opción");
-            return false;
-        }
-    } else {
-        if (rol === '0') {
-            error("No ha seleccionado una opción");
-            return false;
-        }
+
+    if (rol === '0' || roltaller === '0') {
+        error("No ha seleccionado una opción");
+        return false;
     }
 
-    var datos = [nick, pass, email, rol, idusuario];
+    var datos = [nick, pass, email, rol, idusuario, roltaller];
     $(document).ajaxSend(function (e, xhr, options) {
         var token = $("input[name='_csrf']").val();
         var cabecera = "X-CSRF-TOKEN";
@@ -266,7 +254,7 @@ function eliminarUsuario() {
                         alert("Se ha producido un error en el servidor");
                         break;
                     case 'exito':
-                        ok("Los datos se procesarón CORRECTAMENTE!");
+                        alert("Los datos se procesarón CORRECTAMENTE!");
                         setTimeout(function () {
                             location.href = "usuario";
                         }, 1000);

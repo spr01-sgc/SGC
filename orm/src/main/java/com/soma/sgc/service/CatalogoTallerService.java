@@ -23,5 +23,7 @@ public interface CatalogoTallerService {
     List<CatalogoTaller> showTaller();
 
     CatalogoTaller busquedaId(int idtaller);
+    
+    CatalogoTaller mostrarNombre(int idtaller);
 
 }

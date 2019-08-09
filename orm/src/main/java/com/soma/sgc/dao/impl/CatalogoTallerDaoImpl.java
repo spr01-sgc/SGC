@@ -58,4 +58,12 @@ public class CatalogoTallerDaoImpl extends HibernateDao<Integer, CatalogoTaller>
         return taller;
     }
 
+    @Override
+    public CatalogoTaller mostrarNombre(int idtaller) {
+        Criteria criteria = creaCriteria();
+        criteria.addOrder(Order.desc("idtaller"));
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        return (CatalogoTaller) criteria.uniqueResult();
+    }
+
 }

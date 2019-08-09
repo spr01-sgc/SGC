@@ -51,6 +51,11 @@ public class CatalogoTallerServiceImpl implements CatalogoTallerService {
     public CatalogoTaller busquedaId(int idtaller) {
         return tallerDao.busquedaId(idtaller);
     }
+
+    @Override
+    public CatalogoTaller mostrarNombre(int idtaller) {
+        return tallerDao.mostrarNombre(idtaller);
+    }
     
 }
 
