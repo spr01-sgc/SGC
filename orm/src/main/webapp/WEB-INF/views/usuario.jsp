@@ -115,9 +115,11 @@
                                         <option value="${rol.rolid}">${rol.nombre} </option>
                                     </c:forEach>
                                 </select>                                            
-                            </div>   
+                            </div>  
+                            <label  class="control-label col-sm-2">Talleres:<b style="color: red" title="Campo Requerido">*</b></label>
                             <div class="col-sm-4">
                                 <!-- consulta catalogo -->
+                                 
                                 <select id="roltaller" class="form-control">
                                     <option value="0">Seleccione Taller</option>
                                     <c:forEach items="${lTaller}" var="taller">
@@ -129,6 +131,7 @@
                                 <input type="text"  style="display:none" class="form-control" id="idusuario" >
                             </div>
                         </div>
+                        
                     </form> 
                 </div><!--modal body-->
                 <div class="modal-footer">
