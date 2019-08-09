@@ -1,6 +1,6 @@
 $.noConflict();//trabaja diferentes versiones jquery
 $(document).ready(function () {
-
+    alertify.set('notifier','position', 'bottom-right');
 });//ready
 
 function btnUsuario() {
@@ -37,7 +37,7 @@ function eliminarUsuario1() {
         $("#idusuario").val(idusuariT);
         var id = $("#idusuario").val();
         if (id === '') {
-            error("NO se ha seleccionado una opci&oacuten");
+            alertify.error("No se ha seleccionado una opci&oacuten");
             return false;
         }
         var datos = [id];
@@ -56,25 +56,25 @@ function eliminarUsuario1() {
                 //alert(retorno);
                 switch (retorno) {
                     case 'errorDato':
-                        alert("Los datos no se procesaron correctamente");
+                        alertify.error("Los datos no se procesaron correctamente");
                         break;
                     case 'error':
-                        alert("Se ha producido un error en el servidor");
+                        alertify.error("Se ha producido un error en el servidor");
                         break;
                     case 'exito':
                         //carga lo que se indica en id DIV
-                        ok("Los datos se procesarón CORRECTAMENTE!");
+                        alertify.success("Los datos se procesarón CORRECTAMENTE!");
                         setTimeout(function () {
                             location.href = "usuario";
                         }, 1000);
                         break;
                     case 'errorAcceso':
-                        alert("No ha iniciado sesion");
+                        alertify.error("No ha iniciado sesion");
                         break;
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert("Se ha producido un error en el servidor");
+                alertify.error("Se ha producido un error en el servidor");
             }
         });
     });
@@ -97,15 +97,15 @@ function verificarUsuario() {
         success: function (retorno) {
             if (retorno.length !== 0) {
                 $("#nick").focus();
-                error("El usuario con nickname " + nick + " ya existe");
+                alertify.error("El usuario con nickname " + nick + " ya existe");
                 unBlockUI(200);
             } else {
-                ok("El nickname " + nick + " esta disponible");
+                alertify.success("El nickname " + nick + " esta disponible");
                 unBlockUI(200);
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Se ha producido un error en el servidor");
+            alertify.error("Se ha producido un error en el servidor");
         }
     });
 }
@@ -124,7 +124,7 @@ function agregarUsuario() {
     }
     var rolname = $('#roluser').find(":selected").text();
     if (rol === '0' || roltaller === '0') {
-        error("No ha seleccionado una opción");
+        alertify.error("No ha seleccionado una opción");
         return false;
     }
 
@@ -143,24 +143,24 @@ function agregarUsuario() {
             //alert(retorno);
             switch (retorno) {
                 case 'errorDato':
-                    alert("Los datos no se procesaron correctamente");
+                    alertify.error("Los datos no se procesaron correctamente");
                     break;
                 case 'error':
-                    alert("Se ha producido un error en el servidor");
+                    alertify.error("Se ha producido un error en el servidor");
                     break;
                 case 'exito':
-                    alert("Los datos se procesarón CORRECTAMENTE!");
+                    alertify.success("Los datos se procesarón CORRECTAMENTE!");
                     setTimeout(function () {
                         location.href = "usuario";
                     }, 1000);
                     break;
                 case 'errorAcceso':
-                    alert("No ha iniciado sesion");
+                    alertify.error("No ha iniciado sesion");
                     break;
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Se ha producido un error en el servidor");
+            alertify.error("Se ha producido un error en el servidor");
         }
 
     });
@@ -175,14 +175,14 @@ function actualizarUsuario() {
     var roltaller = $("#roltaller").val();
 
     if (nick === '' || pass === '') {
-        error("Hay campos vacios");
+        alertify.error("Hay campos vacios");
         return false;
     }
 
     var rolname = $('#roluser').find(":selected").text();
 
     if (rol === '0' || roltaller === '0') {
-        error("No ha seleccionado una opción");
+        alertify.error("No ha seleccionado una opción");
         return false;
     }
 
@@ -202,72 +202,25 @@ function actualizarUsuario() {
             //alert(retorno);
             switch (retorno) {
                 case 'errorDato':
-                    alert("Los datos no se procesaron correctamente");
+                    alertify.error("Los datos no se procesaron correctamente");
                     break;
                 case 'error':
-                    alert("Se ha producido un error en el servidor");
+                    alertify.error("Se ha producido un error en el servidor");
                     break;
                 case 'exito':
-                    ok("Los datos se procesarón CORRECTAMENTE!");
+                    alertify.success("Los datos se procesarón CORRECTAMENTE!");
                     setTimeout(function () {
                         location.href = "usuario";
                     }, 1000);
                     break;
                 case 'errorAcceso':
-                    alert("No ha iniciado sesion");
+                    alertify.error("No ha iniciado sesion");
                     break;
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Se ha producido un error en el servidor");
+            alertify.error("Se ha producido un error en el servidor");
         }
-    });
-}
-//Esta funcion no se ocupa solo se actualizan los usuarios
-function eliminarUsuario() {
-    $("#tableUsuario tbody").on('click', 'tr', function () {
-        var idT = $('td', this).eq(20).text();
-        $("#iduser").val(idT);
-        var id = $("#iduser").val();
-        if (id === '') {
-            error("NO se ha seleccioando el usuario");
-            return false;
-        }
-        var datos = [id];
-        $(document).ajaxSend(function (e, xhr, options) {
-            var token = $("input[name='_csrf']").val();
-            var cabecera = "X-CSRF-TOKEN";
-            xhr.setRequestHeader(cabecera, token);
-        });
-        $.ajax({
-            url: "usuario/eliminarUsuario",
-            data: {datos: datos},
-            dataType: 'html',
-            type: 'POST',
-            success: function (retorno) {
-                //alert(retorno);
-                switch (retorno) {
-                    case 'errorDato':
-                        alert("Los datos no se procesaron correctamente");
-                        break;
-                    case 'error':
-                        alert("Se ha producido un error en el servidor");
-                        break;
-                    case 'exito':
-                        alert("Los datos se procesarón CORRECTAMENTE!");
-                        setTimeout(function () {
-                            location.href = "usuario";
-                        }, 1000);
-                        break;
-                    case 'errorAcceso':
-                        alert("No ha iniciado sesion");
-                        break;
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert("Se ha producido un error en el servidor");
-            }
-        });
     });
 }
 
