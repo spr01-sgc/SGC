@@ -25,3 +25,19 @@ function busquedaTbl(tabla) {
         }
     }
 }
+
+
+/**Función para excel**/
+
+function reportExcel(idTbl, nomRep) {
+    if (idTbl === '#tableUsuario') {
+        var link = document.createElement('a');
+        document.body.appendChild(link);
+        link.download = reporePrueba + ".xls";
+        link.href = 'data:application/vnd.ms-excel,' + escape($(tableUsuario).html());
+        link.click();
+        document.body.removeChild(link);
+        $("#tbPre").empty();//limpiar tabla
+    }
+}
+
