@@ -33,6 +33,17 @@ public class CatalogoTaller implements Serializable{
     
     @Column(name = "direccion")
     private String direccion;
+    
+    @Column(name = "numeroEx")
+    private String numeroEx;
+
+    public String getNumeroEx() {
+        return numeroEx;
+    }
+
+    public void setNumeroEx(String numeroEx) {
+        this.numeroEx = numeroEx;
+    }
 
     public Integer getIdtaller() {
         return idtaller;
