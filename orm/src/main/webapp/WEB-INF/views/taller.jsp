@@ -15,46 +15,43 @@
 <div class="container">   
     <div class="panel-group">
         <div class="panel panel-primary">
-            <div class="panel-heading">Listado de Usuarios</div>
+            <div class="panel-heading">Listado de Talleres</div>
             <div id="contenidoPantalla" class="panel-body">        
                 <div class="row">
                     <div class="form-group">
                         <div class="btn btn-group">
-                            <button id="agregarU" class="btn btn-info" onclick="btnUsuario();" data-toggle="modal" data-target="#myModal"> 
-                                <span class="glyphicon glyphicon-plus"></span>Agregar Usuario</button>
+                            <button id="agregarT" class="btn btn-info" onclick="btnTaller();" data-toggle="modal" data-target="#myModal"> 
+                                <span class="glyphicon glyphicon-plus"></span>Agregar Taller</button>
                         </div>
                         <input type="hidden" name="${_csrf.parameterName}"
                                value="${_csrf.token}" />
                         <input type="text" class="form-control pull-right" style="width:20%" 
-                               id="search" onkeyup="busquedaTbl('tableUsuario');" placeholder="Busqueda">
+                               id="search" onkeyup="busquedaTbl('tableTaller');" placeholder="Busqueda">
                     </div>
-                    <!-- Listado de usuarios -->
+                    <!-- Listado de talleres -->
                     <div  class="col-md-12">
                         <div class="table-responsive">
-                            <table id="tableUsuario" class="table table-striped">
+                            <table id="tableTaller" class="table table-striped">
                                 <thead>
-                                    <tr>                            
+                                    <tr> 
+                                        <th style="display:none">IDTaller</th>
                                         <th>No</th>
-                                        <th>Nickname</th>
-                                        <th style="display:none">Password</th>
-                                        <th>Correo Electronico</th>
-                                        <th style="display:none">IDrol</th>
-                                        <th>Rol</th>
-                                        <th style="display:none">IDEstatus</th>
+                                        <th>Taller</th>
+                                        <th>Dirección</th>
                                         <th>Actualizar</th>
                                         <th>Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody id="bodytabla">
-                                    <c:forEach items="${ltaller}" var="usuario" varStatus="count"> 
+                                    <c:forEach items="${ltaller}" var="taller" varStatus="count"> 
                                         <tr>                               
                                          
-                                            <td id="nouser">${count.count}</td>
+                                            <td id="notaller">${count.count}</td>
                                         
-                                            <td><button id="mostrarU" onclick="mostrarUsuario();" data-toggle="modal" data-target="#myModal" class="btn btn-warning">
+                                            <td><button id="mostrarT" onclick="mostrarTaller();" data-toggle="modal" data-target="#myModal" class="btn btn-warning">
                                                     <span class="glyphicon glyphicon-pencil"></span> </button></td>
                                             <!-- Eliminar -->
-                                            <td><button id="mostrarU" onclick="eliminarUsuario1();"  class="btn btn-danger">
+                                            <td><button id="mostrarU" onclick="eliminarTaller();"  class="btn btn-danger">
                                                     <span class="glyphicon glyphicon-remove"></span> </button></td>
                                         </tr>
                                     </c:forEach>
@@ -76,40 +73,30 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Fomulario para administrar usuarios del sistema</h3>
+                    <h3>Fomulario Para Administrar Talleres</h3>
                 </div>
                 <div class="modal-body">
-                    <!--Formilario para agregar usuario -->
-                    <form class="form-horizontal"  modelAttribute="user" id="frmUsuario">
+                    <!--Formulario para agregar taller -->
+                    <form class="form-horizontal"  modelAttribute="user" id="frmTaller">
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="nickname">Nickname:<b style="color: red" title="Campo Requerido">*</b></label>
+                            <label class="control-label col-sm-2" for="nombreT">Nombre Taller:<b style="color: red" title="Campo Requerido">*</b></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nick" placeholder="Ingrese alias" onchange="verificarUsuario();"required>
+                                <input type="text" class="form-control" id="nombreT" placeholder="Ingrese alias" onchange="verificarTaller();"required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Password:<b style="color: red" title="Campo Requerido">*</b></label>
+                            <label class="control-label col-sm-2" for="direccionT">Dirección Taller:<b style="color: red" title="Campo Requerido">*</b></label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="pass" placeholder="Ingrese password" required>
+                                <input type="text" class="form-control" id="direccionT" placeholder="Av. Norte" >
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="email">Correo:<b style="color: red" title="Campo Requerido">*</b></label>
+                            <label class="control-label col-sm-2" for="numeroEx">Número Exterior:<b style="color: red" title="Campo Requerido">*</b></label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="email" placeholder="nombredeusuario@nombrededominio.extensión" >
+                                <input type="text" class="form-control" id="numeroEx" placeholder="125 - A" >
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label  class="control-label col-sm-2">Roles<b style="color: red" title="Campo Requerido">*</b></label>
-                            <div class="col-sm-4">
-                                <!-- consulta catalogo -->
-                                <select id="roluser" class="form-control">
-                                    <option value="0">Seleccione rol de usuario</option>
-                                    <c:forEach items="${lRol}" var="rol">
-                                        <option value="${rol.rolid}">${rol.nombre} </option>
-                                    </c:forEach>
-                                </select>                                            
-                            </div>                                       
+                        <div class="form-group">                                       
                             <div class="col-sm-10">
                                 <input type="text"  style="display:none" class="form-control" id="idusuario" >
                             </div>
@@ -118,9 +105,9 @@
                 </div><!--modal body-->
                 <div class="modal-footer">
                     <div class="form-group">
-                        <button id="guardarU" type="button" class="btn btn-success" onclick="agregarUsuario();">Guardar</button>
-                        <button id="actualizarU" onclick="actualizarUsuario();" class="btn btn-primary" >Actualizar</button>
-                        <a id="user" href="<c:url value='/usuario'/>"><button type="button" class="btn btn-default" onclick="limpiarForm('frmUsuario');">Cerrar</button></a>
+                        <button id="guardarT" type="button" class="btn btn-success" onclick="agregarTaller();">Guardar</button>
+                        <button id="actualizarT" onclick="actualizarTaller();" class="btn btn-primary" >Actualizar</button>
+                        <a id="taller" href="<c:url value='/taller'/>"><button type="button" class="btn btn-default" onclick="limpiarForm('frmTaller');">Cerrar</button></a>
 
                     </div>
                 </div><!--modal footer-->
