@@ -53,8 +53,10 @@ public class ControllerTaller {
      */
     @RequestMapping(value = {"/taller"}, method = RequestMethod.GET)
     public String usuario(ModelMap model) {
-    model.addAttribute("user",usuarioEnSesion());
+
         if (!estaUsuarioAnonimo()) { 
+              
+                  model.addAttribute("user_en_sesion", usuarioEnSesion());
                  List<CatalogoTaller> ltaller = tallerService.showTaller();
             // enviar los datos JSP
             model.addAttribute("ltaller", ltaller);
@@ -82,13 +84,13 @@ public class ControllerTaller {
 
          
             // creacion de objeto usuario
-            Usuario usuario = new Usuario();
-            usuario.setNickname(datos[0]);
-            usuario.setPass(datos[1]);
-            usuario.setCorreoelectronico(datos[2]);
+           CatalogoTaller taller = new CatalogoTaller();
+           taller.setNombre(datos[0]);
+           taller.setDireccion(datos[1]);
+           taller.setNumeroEx(datos[2]);
           
 
-            if (usuarioService.save(usuario)) {
+            if (tallerService.save(taller)) {
                 return "exito";
             } else {
                 return "error";
@@ -99,7 +101,7 @@ public class ControllerTaller {
     
     //Metodo para actualizar Usuario
 
-    @RequestMapping(value = "/taller/actualizart", method = RequestMethod.POST)
+    @RequestMapping(value = "/taller/actualizarTaller", method = RequestMethod.POST)
     public @ResponseBody
     String actualizarTaller(@RequestParam(value = "datos[]") String datos[]) {
         if (!estaUsuarioAnonimo()) {
@@ -110,13 +112,13 @@ public class ControllerTaller {
                 }
             }//termina de recorrer el arreglo
 
-            List<Usuario> lUsuario = usuarioService.showUsuario();
-            if (!lUsuario.isEmpty()) {
-                for (Usuario usuario : lUsuario) {
-                    if (usuario.getUsuarioid() == Integer.parseInt(datos[4])) {
-                        usuario.setNickname(datos[0]);
-                        usuario.setPass(datos[1]);
-                        usuario.setCorreoelectronico(datos[2]);
+            List<CatalogoTaller> ltaller = tallerService.showTaller();
+            if (!ltaller.isEmpty()) {
+                for (CatalogoTaller taller : ltaller) {
+                    if (taller.getIdtaller() == Integer.parseInt(datos[0])) {
+                      taller.setNombre(datos[1]);
+                      taller.setDireccion(datos[2]);
+                      taller.setNumeroEx(datos[3]);
                         
                     
                   
@@ -124,7 +126,7 @@ public class ControllerTaller {
                    
                         
                   
-                        if (usuarioService.update(usuario)) {
+                        if (tallerService.update(taller)) {
                           //bitacoraUsuarioDaoAux.bitacoraUsuario("Modificar Usuario", usuarioEnSesion(), estaUsuarioAnonimo());
                             return "exito";
                         } else {
@@ -140,7 +142,7 @@ public class ControllerTaller {
     }
 
     //Metodo para eliminar un Usuario no puede ser eliminado por las acciones
-    @RequestMapping(value = "/taller/eliminarUsuario", method = RequestMethod.POST)
+    @RequestMapping(value = "/taller/eliminarTaller", method = RequestMethod.POST)
     public @ResponseBody
     String eliminarTaller(@RequestParam(value = "datos[]") String datos[]) {
         if (!estaUsuarioAnonimo()) {
@@ -151,20 +153,16 @@ public class ControllerTaller {
                 }
             }//termina de recorrer el arreglo
 
-            List<Usuario> lUsuario = usuarioService.showUsuario();
+            List<CatalogoTaller> ltaller = tallerService.showTaller();
 
-            if (!lUsuario.isEmpty()) {
-                for (Usuario usuario : lUsuario) {
+            if (!ltaller.isEmpty()) {
+                for (CatalogoTaller taller : ltaller) {
                     //obtiene el id del delitoa a eliminar
                     int Id = Integer.parseInt(datos[0]);
-                    if (usuario.getUsuarioid() == Integer.parseInt(datos[0])) {
-//                        usuario.setNickname(datos[0]);
-//                        usuario.setPass(datos[1]);
-//                        usuario.setCorreoelectronico(datos[2]);
-//                        RolUsuario lRolUsuario = rolService.buscarNombre(Integer.parseInt(datos[3]));
-//                        usuario.setRol(lRolUsuario);
+                    if (taller.getIdtaller() == Integer.parseInt(datos[0])) {
+//                    
 
-                        if (usuarioService.delete(Id)) {
+                        if (tallerService.delete(Id)) {
 
                             //bitacoraUsuarioDaoAux.bitacoraUsuario("Eliminar ", usuarioEnSesion(), estaUsuarioAnonimo());
                             return "exito";
