@@ -203,7 +203,7 @@ public class ControllerUsuario {
                         usuario.setCorreoelectronico(datos[2]);
 
                         RolUsuario lRolUsuario = rolService.buscarNombre(Integer.parseInt(datos[3]));
-                        CatalogoTaller lTaller = catalogoTallerService.mostrarNombre(Integer.parseInt(datos[4]));
+                        CatalogoTaller lTaller = catalogoTallerService.busquedaId(Integer.parseInt(datos[5]));
 
                         usuario.setRol(lRolUsuario);
                         usuario.setIdtaller(lTaller);
