@@ -7,10 +7,11 @@ package com.soma.sgc.controller;
 
 import com.soma.sgc.model.CatalogoTaller;
 import java.net.UnknownHostException;
-
+import com.soma.sgc.model.UsuarioEnSesion;
 import com.soma.sgc.model.RolUsuario;
 import com.soma.sgc.model.Usuario;
 import com.soma.sgc.service.CatalogoTallerService;
+import com.soma.sgc.service.UsuarioEnSesionService;
 
 import com.soma.sgc.service.RolService;
 import com.soma.sgc.service.UsuarioService;
@@ -47,21 +48,39 @@ public class ControllerUsuario {
     @Autowired
     UsuarioService usuarioService;
     @Autowired
+    UsuarioEnSesionService usuarioEnSesionService;
+    @Autowired
     CatalogoTallerService catalogoTallerService;
     @Autowired
     RolService rolService;
 
     @RequestMapping(value = {"/", "init"}, method = RequestMethod.GET)
-    public String initSistema(ModelMap model) throws UnknownHostException {
+    public String initSistema(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws UnknownHostException {
         if (!estaUsuarioAnonimo()) {
-            //bitacoraUsuarioDaoAux.bitacoraUsuario("Login", usuarioEnSesion(), estaUsuarioAnonimo());
-            // verOpeRele(model);
-            InetAddress address = InetAddress.getLocalHost();
-            address.getHostAddress();
-            Logger.getLogger("IP ").log(Level.INFO, "Tiene IP : " + address.getHostAddress());
-            return "index";
+           // bitacoraUsuarioDaoAux.bitacoraUsuario("Login", usuarioEnSesion(), estaUsuarioAnonimo());
+            Usuario usuarioEn = usuarioService.busquedaNinckname(usuarioEnSesion());
+            model.addAttribute("user_en_sesion", usuarioEnSesion());
+            String ipCliente = request.getRemoteAddr();
+            UsuarioEnSesion usuarioEnSession = usuarioEnSesionService.consultaUsuario(usuarioEn.getUsuarioid());
+            if (usuarioEnSession != null) {
+                if (usuarioEnSession.isStatus() && !usuarioEnSession.getIp().equals(ipCliente)) {
+                    model.addAttribute("en_sesion", "en_sesion");
+                    return "login";
+                } else {
+                    usuarioEnSession.setIp(ipCliente);
+                    usuarioEnSession.setStatus(true);
+                    usuarioEnSesionService.update(usuarioEnSession);
+                    return "index";//modificado
+                }
+            } else {
+                UsuarioEnSesion usuario = new UsuarioEnSesion();
+                usuario.setIp(ipCliente);//address.getHostAddress());
+                usuario.setStatus(true);
+                usuario.setUsuarioId(usuarioEn);
+                usuarioEnSesionService.save(usuario);
+                return "index";//modificado
+            }
         }
-
         return login();
     }
 
@@ -79,6 +98,19 @@ public class ControllerUsuario {
 
         return "index";
     }
+    
+     //Metodo buscar el usuario en sesion y muestra en pantalla cuando se hace una denucnia Oper.Preocupante
+    @RequestMapping(value = "/usuario/usuarioEnsesion", method = RequestMethod.GET)
+    public @ResponseBody
+    String[] usuarioEnsesion() {
+        Usuario lusuario = usuarioService.busquedaNinckname(usuarioEnSesion());
+        String[] usuario = new String[3];
+        usuario[0] = lusuario.getNickname();
+        usuario[1] = lusuario.getCorreoelectronico();
+        String nombre = lusuario.getNickname();
+        usuario[2] = nombre;
+        return usuario;
+    }
 
     /**
      * Metodo para mostrar vista usuarios
@@ -88,8 +120,9 @@ public class ControllerUsuario {
      */
     @RequestMapping(value = {"/usuario"}, method = RequestMethod.GET)
     public String usuario(ModelMap model) {
-        model.addAttribute("user", usuarioEnSesion());
+ 
         if (!estaUsuarioAnonimo()) {
+            
             List<Usuario> lUsuario = usuarioService.showUsuario();
             List<CatalogoTaller> lTaller = catalogoTallerService.showTaller();
             List<RolUsuario> lRol = rolService.showRol();
@@ -97,6 +130,7 @@ public class ControllerUsuario {
             model.addAttribute("lUsuario", lUsuario);
             model.addAttribute("lTaller", lTaller);
             model.addAttribute("lRol", lRol);
+             model.addAttribute("user_en_sesion", usuarioEnSesion());
             return "usuario";
         }
         return "login";
@@ -222,19 +256,6 @@ public class ControllerUsuario {
         return "errorAcceso";
 
     }
-
-    //Metodo buscar el usuario en sesion y muestra en pantalla
-    @RequestMapping(value = "/usuario/usuarioEnsesion", method = RequestMethod.GET)
-    public @ResponseBody
-    String[] usuarioEnsesion() {
-        Usuario lusuario = usuarioService.busquedaNinckname(usuarioEnSesion());
-        String[] usuario = new String[3];
-        usuario[0] = lusuario.getNickname();
-        usuario[1] = lusuario.getCorreoelectronico();
-
-        return usuario;
-    }
-//Metodo busca usuario con operacion interna preocupante
 
     @RequestMapping(value = "/usuario/buscarUsuarioP", method = RequestMethod.POST)
     public @ResponseBody
