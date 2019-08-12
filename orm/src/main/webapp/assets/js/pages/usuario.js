@@ -99,6 +99,7 @@ function verificarUsuario() {
                 $("#nick").focus();
                 alertify.error("El usuario con nickname " + nick + " ya existe");
                 //unBlockUI();
+                //$.unblockUI();
             } else {
                 alertify.success("El nickname " + nick + " esta disponible");
                 //unBlockUI();
