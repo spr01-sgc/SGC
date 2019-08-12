@@ -47,7 +47,7 @@
         <script src="<c:url value='/assets/js/pages/usuario.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/assets/js/pages/Generales.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/assets/js/pages/taller.js'/>" type="text/javascript"></script>
-
+        <script src="<c:url value='/assets/js/pages/empleado.js'/>" type="text/javascript"></script>
 
 
     <style type="text/css">
