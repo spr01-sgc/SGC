@@ -58,6 +58,7 @@ public class CatalogoPuestosDaoImpl extends HibernateDao<Integer, CatalogoPuesto
     @Override
     public CatalogoPuestos mostrarNombre(int idPuesto) {
         Criteria criteria = creaCriteria();
+        criteria.add(Restrictions.eq("idPuesto", idPuesto));
         criteria.addOrder(Order.desc("idPuesto"));
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         return (CatalogoPuestos) criteria.uniqueResult();
