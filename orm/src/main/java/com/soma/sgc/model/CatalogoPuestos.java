@@ -23,18 +23,18 @@ public class CatalogoPuestos implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idpuesto")
-    private Integer idpuesto;
+    @Column(name = "idPuesto")
+    private Integer idPuesto;
     
     @Column(name = "puesto")
     private String puesto;
 
     public Integer getIdpuesto() {
-        return idpuesto;
+        return idPuesto;
     }
 
-    public void setIdpuesto(Integer idpuesto) {
-        this.idpuesto = idpuesto;
+    public void setIdpuesto(Integer idPuesto) {
+        this.idPuesto = idPuesto;
     }
 
     public String getPuesto() {
