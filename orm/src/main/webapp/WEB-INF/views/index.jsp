@@ -19,20 +19,22 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
-        <script src="<c:url value= '/assets/js/jquery-ui.js'/>" type="text/javascript"></script>
-        <link href="<c:url value='/assets/css/jquery-ui.css'/>" rel="stylesheet" />
+        <!--script src="<!c:url value= '/assets/js/jquery-ui.js'/>" type="text/javascript"></script-->
+        <!--link href="<!c:url value='/assets/css/jquery-ui.css'/>" rel="stylesheet" /-->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="Expires" content="0">
         <link href="<c:url value='/assets/css/bootstrap.min.css'/>" rel="stylesheet" />
-         <!--  JS PAGES -->
-        <script src="<c:url value='/assets/js/pages/usuario.js'/>" type="text/javascript"></script>
-        <script src="<c:url value='/assets/js/pages/Generales.js'/>" type="text/javascript"></script>
-        <script src="<c:url value='/assets/js/pages/taller.js'/>" type="text/javascript"></script>
-        <script src="<c:url value='/assets/js/pages/empleado.js'/>" type="text/javascript"></script>
         <!--  Fonts and icons     -->
         <script src="<c:url value='/assets/js/jquery.tabletoCSV.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/assets/js/jquery.blockUI.js'/>" type="text/javascript"></script> 
         <script src="<c:url value= '/assets/js/jquery-1.10.2.js'/>" type="text/javascript"></script>
+        <!-- JS PAGES -->
+        <script src="<c:url value='/assets/js/pages/taller.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/assets/js/pages/empleado.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/assets/js/pages/usuario.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/assets/js/pages/Generales.js'/>" type="text/javascript"></script>
+        
+        <!-- FIN JS PAGES -->
         <script src="<c:url value='/assets/js/bootstrap.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/assets/lib/alertify.js'/>" type="text/javascript"></script>
         <link href="<c:url value='/assets/css/style2.css'/>" rel="stylesheet" />        
