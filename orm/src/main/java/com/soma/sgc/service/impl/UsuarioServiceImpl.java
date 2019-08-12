@@ -12,12 +12,10 @@ import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author estadias2017-2
- */
+
 @Service("usuarioService")
 @Transactional
 public class UsuarioServiceImpl implements UsuarioService {
@@ -29,16 +27,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     private ShaPasswordEncoder passEncoder;
 
     @Override
-    public boolean save(Usuario usuario) { 
-        usuario.setPass(passEncoder.encodePassword(usuario.getPass(),usuario.getNickname()));
-        usuarioDao.save(usuario);
+    public boolean save(Usuario user) { 
+        user.setPass(passEncoder.encodePassword(user.getPass(),user.getNickname()));
+        usuarioDao.save(user);
         return estadoMetodo = true;
     }
 
     @Override
-    public boolean update(Usuario usuario) {
+    public boolean update(Usuario user) {
         //usuario.setPass(passEncoder.encodePassword(usuario.getPass(), this));
-        usuarioDao.update(usuario);
+        usuarioDao.update(user);
         return estadoMetodo = true;
     }
 
