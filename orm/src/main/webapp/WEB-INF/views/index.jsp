@@ -28,7 +28,8 @@
         <script src="<c:url value='/assets/js/jquery.tabletoCSV.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/assets/js/jquery.blockUI.js'/>" type="text/javascript"></script> 
         <script src="<c:url value= '/assets/js/jquery-1.10.2.js'/>" type="text/javascript"></script>
-        <script src="<c:url value='/assets/js/pages/usuario.js'/>" type="text/javascript"></script
+        <script src="<c:url value='/assets/js/pages/usuario.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/assets/js/pages/Generales.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/assets/js/bootstrap.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/assets/lib/alertify.js'/>" type="text/javascript"></script>
         <link href="<c:url value='/assets/css/style2.css'/>" rel="stylesheet" />        
