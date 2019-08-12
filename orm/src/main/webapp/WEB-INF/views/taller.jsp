@@ -38,6 +38,7 @@
                                         <th>No</th>
                                         <th>Taller</th>
                                         <th>Dirección</th>
+                                         <th>Numero-Ex</th>
                                         <th>Actualizar</th>
                                         <th>Eliminar</th>
                                     </tr>
@@ -47,11 +48,16 @@
                                         <tr>                               
                                          
                                             <td id="notaller">${count.count}</td>
+                                             <td style="display:none" >${taller.idtaller}</td> 
+                                            <td>${taller.nombre}</td>
+                                            <td>${taller.direccion}</td>
+                                            <td>${taller.numeroEx}</td>
+                                            
                                         
                                             <td><button id="mostrarT" onclick="mostrarTaller();" data-toggle="modal" data-target="#myModal" class="btn btn-warning">
                                                     <span class="glyphicon glyphicon-pencil"></span> </button></td>
                                             <!-- Eliminar -->
-                                            <td><button id="mostrarU" onclick="eliminarTaller();"  class="btn btn-danger">
+                                            <td><button id="eliminaT" onclick="eliminarTaller();"  class="btn btn-danger">
                                                     <span class="glyphicon glyphicon-remove"></span> </button></td>
                                         </tr>
                                     </c:forEach>
@@ -98,7 +104,7 @@
                         </div>
                         <div class="form-group">                                       
                             <div class="col-sm-10">
-                                <input type="text"  style="display:none" class="form-control" id="idusuario" >
+                                <input type="text"  style="display:none" class="form-control" id="idtaller" >
                             </div>
                         </div>
                     </form> 
