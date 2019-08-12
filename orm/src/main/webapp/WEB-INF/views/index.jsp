@@ -24,6 +24,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="Expires" content="0">
         <link href="<c:url value='/assets/css/bootstrap.min.css'/>" rel="stylesheet" />
+         <!--  JS PAGES -->
+        <script src="<c:url value='/assets/js/pages/usuario.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/assets/js/pages/Generales.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/assets/js/pages/taller.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/assets/js/pages/empleado.js'/>" type="text/javascript"></script>
         <!--  Fonts and icons     -->
         <script src="<c:url value='/assets/js/jquery.tabletoCSV.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/assets/js/jquery.blockUI.js'/>" type="text/javascript"></script> 
@@ -43,11 +48,7 @@
         <script src="<c:url value= '/assets/js/xlsx.js'/>" type="text/javascript"></script>
         <script src="<c:url value= '/assets/js/xlsx.full.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value= '/assets/js/jszip.js'/>" type="text/javascript"></script>
-        <!--  JS PAGES -->
-        <script src="<c:url value='/assets/js/pages/usuario.js'/>" type="text/javascript"></script>
-        <script src="<c:url value='/assets/js/pages/Generales.js'/>" type="text/javascript"></script>
-        <script src="<c:url value='/assets/js/pages/taller.js'/>" type="text/javascript"></script>
-        <script src="<c:url value='/assets/js/pages/empleado.js'/>" type="text/javascript"></script>
+       
 
 
     <style type="text/css">
