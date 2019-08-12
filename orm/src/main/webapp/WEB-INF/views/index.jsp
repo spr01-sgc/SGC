@@ -28,13 +28,10 @@
         <script src="<c:url value='/assets/js/jquery.tabletoCSV.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/assets/js/jquery.blockUI.js'/>" type="text/javascript"></script> 
         <script src="<c:url value= '/assets/js/jquery-1.10.2.js'/>" type="text/javascript"></script>
-        <script src="<c:url value='/assets/js/pages/usuario.js'/>" type="text/javascript"></script>
-        <script src="<c:url value='/assets/js/pages/Generales.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/assets/js/bootstrap.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/assets/lib/alertify.js'/>" type="text/javascript"></script>
         <link href="<c:url value='/assets/css/style2.css'/>" rel="stylesheet" />        
         <link href="<c:url value='/assets/css/style_light.css'/>" rel="stylesheet" />
-
         <link href="<c:url value='/assets/themes/alertify.core.css'/>" rel="stylesheet" />
         <link href="<c:url value='/assets/themes/alertify.default.css'/>" rel="stylesheet" />
         <!--  Fonts and icons -->
@@ -46,6 +43,9 @@
         <script src="<c:url value= '/assets/js/xlsx.js'/>" type="text/javascript"></script>
         <script src="<c:url value= '/assets/js/xlsx.full.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value= '/assets/js/jszip.js'/>" type="text/javascript"></script>
+        <!--  JS PAGES -->
+        <script src="<c:url value='/assets/js/pages/usuario.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/assets/js/pages/Generales.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/assets/js/pages/taller.js'/>" type="text/javascript"></script>
 
 
