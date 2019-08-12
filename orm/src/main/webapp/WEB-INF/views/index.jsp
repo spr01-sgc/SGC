@@ -46,6 +46,7 @@
         <script src="<c:url value= '/assets/js/xlsx.js'/>" type="text/javascript"></script>
         <script src="<c:url value= '/assets/js/xlsx.full.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value= '/assets/js/jszip.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/assets/js/pages/taller.js'/>" type="text/javascript"></script>
 
 
 
