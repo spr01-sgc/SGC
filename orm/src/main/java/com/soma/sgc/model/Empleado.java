@@ -38,9 +38,6 @@ public class Empleado implements Serializable {
     @Column(name = "apm")
     private String apm;
 
-    @Column(name = "puesto")
-    private String puesto;
-
     @Column(name = "descripcion")
     private String descripcion;
 
@@ -53,11 +50,23 @@ public class Empleado implements Serializable {
     @Column(name = "fechaestatus")
     private Date fechaestatus;
 
+    //Establece relacion con CatalogoPuestos
+    @ManyToOne
+    @ForeignKey(name = "idpuesto_fk")
+    private CatalogoPuestos idpuesto;
+    
     //Establece relacion con CatalogoTaller
     @ManyToOne
     @ForeignKey(name = "idtaller_fk")
     private CatalogoTaller idtaller;
-    //relacion con los moldes
+
+    public CatalogoPuestos getIdpuesto() {
+        return idpuesto;
+    }
+
+    public void setIdpuesto(CatalogoPuestos idpuesto) {
+        this.idpuesto = idpuesto;
+    }
   
 
     public Integer getIdempleado() {
@@ -90,14 +99,6 @@ public class Empleado implements Serializable {
 
     public void setApm(String apm) {
         this.apm = apm;
-    }
-
-    public String getPuesto() {
-        return puesto;
-    }
-
-    public void setPuesto(String puesto) {
-        this.puesto = puesto;
     }
 
     public String getDescripcion() {
@@ -142,7 +143,7 @@ public class Empleado implements Serializable {
 
     @Override
     public String toString() {
-        return "Empleado{" + "idempleado=" + idempleado + ", nombre=" + nombre + ", app=" + app + ", apm=" + apm + ", puesto=" + puesto + ", descripcion=" + descripcion + ", serie=" + serie + ", estatus=" + estatus + ", fechaestatus=" + fechaestatus + ", idtaller=" + idtaller + '}';
+        return "Empleado{" + "idempleado=" + idempleado + ", nombre=" + nombre + ", app=" + app + ", apm=" + apm + ", descripcion=" + descripcion + ", serie=" + serie + ", estatus=" + estatus + ", fechaestatus=" + fechaestatus + ", idtaller=" + idtaller + '}';
     }
 
 
