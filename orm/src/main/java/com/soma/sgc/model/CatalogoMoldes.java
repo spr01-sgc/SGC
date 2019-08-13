@@ -38,7 +38,7 @@ public class CatalogoMoldes implements Serializable {
     private String serie;
 
     @Column(name = "enexistencia")
-    private String enexistencia;
+    private int enexistencia;
 
     public Integer getIdmolde() {
         return idmolde;
@@ -72,11 +72,11 @@ public class CatalogoMoldes implements Serializable {
         this.serie = serie;
     }
 
-    public String getEnexistencia() {
+    public int getEnexistencia() {
         return enexistencia;
     }
 
-    public void setEnexistencia(String enexistencia) {
+    public void setEnexistencia(int enexistencia) {
         this.enexistencia = enexistencia;
     }
 
