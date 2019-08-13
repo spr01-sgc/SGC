@@ -47,8 +47,11 @@ public class Empleado implements Serializable {
     @Column(name = "estatus")
     private String estatus;
 
-    @Column(name = "fechaestatus")
-    private Date fechaestatus;
+    @Column(name = "fechaentrada")
+    private Date fechaentrada;
+    
+    @Column(name = "fechasalida")
+    private Date fechasalida;
 
     //Establece relacion con CatalogoPuestos
     @ManyToOne
@@ -125,12 +128,20 @@ public class Empleado implements Serializable {
         this.estatus = estatus;
     }
 
-    public Date getFechaestatus() {
-        return fechaestatus;
+    public Date getFechaentrada() {
+        return fechaentrada;
     }
 
-    public void setFechaestatus(Date fechaestatus) {
-        this.fechaestatus = fechaestatus;
+    public void setFechaentrada(Date fechaentrada) {
+        this.fechaentrada = fechaentrada;
+    }
+    
+     public Date getFechasalida() {
+        return fechasalida;
+    }
+
+    public void setFechasalida(Date fechasalida) {
+        this.fechasalida = fechasalida;
     }
 
     public CatalogoTaller getIdtaller() {
@@ -143,7 +154,7 @@ public class Empleado implements Serializable {
 
     @Override
     public String toString() {
-        return "Empleado{" + "idempleado=" + idempleado + ", nombre=" + nombre + ", app=" + app + ", apm=" + apm + ", descripcion=" + descripcion + ", serie=" + serie + ", estatus=" + estatus + ", fechaestatus=" + fechaestatus + ", idtaller=" + idtaller + '}';
+        return "Empleado{" + "idempleado=" + idempleado + ", nombre=" + nombre + ", app=" + app + ", apm=" + apm + ", descripcion=" + descripcion + ", serie=" + serie + ", estatus=" + estatus + ", fechaentrada=" + fechaentrada + ", idtaller=" + idtaller + '}';
     }
 
 
