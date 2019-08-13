@@ -20,5 +20,7 @@ public interface CatalogoMoldesDao {
     List<CatalogoMoldes> showMolde();
     CatalogoMoldes busquedaId(int idmolde);
     CatalogoMoldes mostrarNombre(String modelo);
+    CatalogoMoldes busquedaSerie(String serie);
+
    
 }

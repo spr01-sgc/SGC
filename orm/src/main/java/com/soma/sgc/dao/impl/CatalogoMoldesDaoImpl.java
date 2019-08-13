@@ -64,4 +64,15 @@ public class CatalogoMoldesDaoImpl extends HibernateDao<Integer, CatalogoMoldes>
         return (CatalogoMoldes) criteria.uniqueResult();
     }
 
+    @Override
+    public CatalogoMoldes busquedaSerie(String serie) {
+        Criteria criteria = creaCriteria();
+        criteria.add(Restrictions.eq("serie", serie));
+        System.out.println(CatalogoMoldesDaoImpl.class + "\nBuscando Serie: " + serie);
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        return (CatalogoMoldes) criteria.uniqueResult();
+    }
+    
+    
+
 }

@@ -58,6 +58,11 @@ public class CatalogoMoldesServiceImpl implements CatalogoMoldesService{
          return moldesDao.mostrarNombre(modelo);
     }
 
+    @Override
+    public CatalogoMoldes busquedaSerie(String serie) {
+        return moldesDao.busquedaSerie(serie);
+    }
+
  
     
     

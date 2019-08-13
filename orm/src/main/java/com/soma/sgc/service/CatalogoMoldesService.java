@@ -19,4 +19,5 @@ public interface CatalogoMoldesService {
     List<CatalogoMoldes> showMolde();
     CatalogoMoldes busquedaId(int idMolde);
     CatalogoMoldes mostrarNombre(String modelo);
+    CatalogoMoldes busquedaSerie(String serie);
 }

@@ -170,6 +170,16 @@ public class ControllerMolde {
         return "errorAcceso";
 
     }
+    
+     @RequestMapping(value = "/molde/verificarSerie", method = RequestMethod.POST)
+    public @ResponseBody CatalogoMoldes verificarSerie(@RequestParam(value = "datos[]") String datos[]) {
+        CatalogoMoldes buscarSerie = null;
+        if (!estaUsuarioAnonimo()) {
+            buscarSerie = moldeService.busquedaSerie(datos[0]);
+            
+        }
+        return buscarSerie;
+    }
 
     public String usuarioEnSesion() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

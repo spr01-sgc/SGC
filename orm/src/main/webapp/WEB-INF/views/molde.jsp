@@ -111,7 +111,7 @@
                 </div><!--modal body-->
                 <div class="modal-footer">
                     <div class="form-group">
-                        <button id="guardarM" type="button" class="btn btn-success" onclick="agregarMolde();">Guardar</button>
+                        <button id="guardarM" type="button" class="btn btn-success" onclick="agregarMolde2();">Guardar</button>
                         <button id="actualizarM" onclick="actualizarMolde();" class="btn btn-primary" >Actualizar</button>
                         <a id="molde" href="<c:url value='/molde'/>"><button type="button" class="btn btn-default" onclick="limpiarForm('frmMolde');">Cerrar</button></a>
                     </div>

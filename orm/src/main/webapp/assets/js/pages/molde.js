@@ -183,6 +183,43 @@ function actualizarMolde() {
     });
 }
 
+/**
+ * Funcion que permite verificar si existe la serie y 
+ * manda llamar agregarMolde() para agregar a un 
+ * molde si no existe la serie
+ * */
+function agregarMolde2() {
+    var datos = [$("#serie").val().trim()];
+    $(document).ajaxSend(function (e, xhr, options) {
+        var token = $("input[name='_csrf']").val();
+        var cabecera = "X-CSRF-TOKEN";
+        xhr.setRequestHeader(cabecera, token);
+    });
+    $.ajax({
+        url: "molde/verificarSerie",
+        data: {datos: datos},
+        dataType: 'html',
+        type: 'POST',
+        success: function (retorno) {
+            if (retorno.length !== 0) {
+                $("#serie").focus();
+                alertify.error("La serie " + datos + " ya existe");
+                return false;
+                //unBlockUI();
+                //$.unblockUI();
+            } else {
+                alertify.success("La serie " + datos + " esta disponible");
+                //unBlockUI();
+                agregarMolde();
+                return true;
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alertify.error("Se ha producido un error en el servidor");
+        }
+    });
+}
+
 
 
 
