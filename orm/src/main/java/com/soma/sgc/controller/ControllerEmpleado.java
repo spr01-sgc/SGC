@@ -211,6 +211,17 @@ public class ControllerEmpleado {
         return "errorAcceso";
 
     }
+    
+     @RequestMapping(value = "/empleado/verificarSerie", method = RequestMethod.POST)
+    public @ResponseBody Empleado verificarSerie(@RequestParam(value = "datos[]") String datos[]) {
+        Empleado buscarSerie = null;
+        if (!estaUsuarioAnonimo()) {
+            buscarSerie = empleadoService.busquedaSerie(datos[0]);
+            
+        }
+        return buscarSerie;
+    }
+    
     /**
      * Este metodo verificara que un usuario este autenticado correctamente
      */

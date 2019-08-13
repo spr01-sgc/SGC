@@ -34,7 +34,7 @@ function mostrarEmpleado() {
         $("#estatus").val(estatus);
         var fechaEntrada = $('td', this).eq(11).text();
         $("#fechaEstatus").val(fechaEntrada);
-         var fechaSalida = $('td', this).eq(12).text();
+        var fechaSalida = $('td', this).eq(12).text();
         $("#fechaEstatus").val(fechaSalida);
         var descripcion = $('td', this).eq(13).text();
         $("#descripcion").val(descripcion);
@@ -110,6 +110,12 @@ function agregarEmpleado() {
         return false;
     }
 
+    if (verificarSerie2(serie)) {
+        return true;
+    } else {
+        return false;
+    }
+
     var datos = [nombre, app, apm, estatus, puesto, serie, taller, descripcion];
     $(document).ajaxSend(function (e, xhr, options) {
         var token = $("input[name='_csrf']").val();
@@ -158,7 +164,7 @@ function actualizarEmpleado() {
     var taller = $("#IDtaller").val();
     var descripcion = $("#descripcion").val();
     var idEmpleado = $("#idEmpleado").val();
-    
+
     if (nombre === '' || app === '' || apm === '' || serie === '') {
         alertify.error("Hay campos vacios");
         return false;
@@ -199,6 +205,70 @@ function actualizarEmpleado() {
                 case 'errorAcceso':
                     alertify.error("No ha iniciado sesion");
                     break;
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alertify.error("Se ha producido un error en el servidor");
+        }
+    });
+}
+/*Funcion que permite si existe la serie del empleado*/
+function verificarSerie() {
+    var serie = [$("#serie").val().trim()];
+
+    $(document).ajaxSend(function (e, xhr, options) {
+        var token = $("input[name='_csrf']").val();
+        var cabecera = "X-CSRF-TOKEN";
+        xhr.setRequestHeader(cabecera, token);
+    });
+    $.ajax({
+        url: "empleado/verificarSerie",
+        data: {datos: serie},
+        dataType: 'html',
+        type: 'POST',
+        success: function (retorno) {
+            if (retorno.length !== 0) {
+                $("#serie").focus();
+                alertify.error("La serie " + serie + " ya existe");
+                return false;
+                //unBlockUI();
+                //$.unblockUI();
+            } else {
+                alertify.success("La serie " + serie + " esta disponible");
+                //unBlockUI();
+                return true;
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alertify.error("Se ha producido un error en el servidor");
+        }
+    });
+}
+
+function verificarSerie2(serie) {
+    var serie = [$("#serie").val().trim()];
+
+    $(document).ajaxSend(function (e, xhr, options) {
+        var token = $("input[name='_csrf']").val();
+        var cabecera = "X-CSRF-TOKEN";
+        xhr.setRequestHeader(cabecera, token);
+    });
+    $.ajax({
+        url: "empleado/verificarSerie",
+        data: {datos: serie},
+        dataType: 'html',
+        type: 'POST',
+        success: function (retorno) {
+            if (retorno.length !== 0) {
+                $("#serie").focus();
+                alertify.error("La serie " + serie + " ya existe");
+                return false;
+                //unBlockUI();
+                //$.unblockUI();
+            } else {
+                alertify.success("La serie " + serie + " esta disponible");
+                //unBlockUI();
+                return true;
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {

@@ -148,7 +148,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="serie">Serie:<b style="color: red" title="Campo Requerido">*</b></label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="serie" placeholder="Ingrese Serie" >
+                                <input type="text" class="form-control" id="serie" onchange="verificarSerie();" placeholder="Ingrese Serie" >
                             </div>
                             <label  class="control-label col-sm-2">Taller:<b style="color: red" title="Campo Requerido">*</b></label>
                             <div class="col-sm-4">
