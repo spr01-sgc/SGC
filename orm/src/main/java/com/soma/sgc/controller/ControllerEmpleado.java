@@ -49,7 +49,7 @@ public class ControllerEmpleado {
     CatalogoPuestosService puestosService;
 
     @RequestMapping(value = {"/empleado"}, method = RequestMethod.GET)
-    public String usuario(ModelMap model) {
+    public String empleado(ModelMap model) {
         model.addAttribute("user_en_sesion", usuarioEnSesion());
         if (!estaUsuarioAnonimo()) {
             List<Empleado> lEmpleado = empleadoService.showEmpleado();
@@ -181,7 +181,7 @@ public class ControllerEmpleado {
      */
     @RequestMapping(value = "/empleado/eliminarEmpleado", method = RequestMethod.POST)
     public @ResponseBody
-    String eliminarUsuario(@RequestParam(value = "datos[]") String datos[]) {
+    String eliminarEmpleado(@RequestParam(value = "datos[]") String datos[]) {
         if (!estaUsuarioAnonimo()) {
             for (String dato : datos) {
                 if (dato.equals("")) {
