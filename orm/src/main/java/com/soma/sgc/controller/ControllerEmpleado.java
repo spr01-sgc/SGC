@@ -50,7 +50,7 @@ public class ControllerEmpleado {
 
     @RequestMapping(value = {"/empleado"}, method = RequestMethod.GET)
     public String usuario(ModelMap model) {
-        model.addAttribute("user", usuarioEnSesion());
+        model.addAttribute("user_en_sesion", usuarioEnSesion());
         if (!estaUsuarioAnonimo()) {
             List<Empleado> lEmpleado = empleadoService.showEmpleado();
             List<CatalogoTaller> lTaller = tallerService.showTaller();
@@ -98,7 +98,7 @@ public class ControllerEmpleado {
             }
 
             Date fecha = new Date();
-            
+
             CatalogoPuestos lPuesto = puestosService.mostrarNombre(Integer.parseInt(datos[4]));
             CatalogoTaller lTaller = tallerService.mostrarNombre(Integer.parseInt(datos[6]));
             //Creacion del objeto 
@@ -143,7 +143,7 @@ public class ControllerEmpleado {
             if (!lEmpleado.isEmpty()) {
                 for (Empleado empleado : lEmpleado) {
                     if (empleado.getIdempleado() == Integer.parseInt(datos[8])) {
-                        
+
                         Date fecha = new Date();
 
                         CatalogoPuestos lPuesto = puestosService.mostrarNombre(Integer.parseInt(datos[4]));
@@ -173,8 +173,9 @@ public class ControllerEmpleado {
 
     /**
      * Metodo para eliminar un empleado
+     *
      * @param datos
-     * @return 
+     * @return
      */
     @RequestMapping(value = "/empleado/eliminarEmpleado", method = RequestMethod.POST)
     public @ResponseBody
@@ -208,8 +209,6 @@ public class ControllerEmpleado {
         return "errorAcceso";
 
     }
-    
-
     /**
      * Este metodo verificara que un usuario este autenticado correctamente
      */
