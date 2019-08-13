@@ -61,6 +61,7 @@ public class CatalogoTallerDaoImpl extends HibernateDao<Integer, CatalogoTaller>
     @Override
     public CatalogoTaller mostrarNombre(int idtaller) {
         Criteria criteria = creaCriteria();
+        criteria.add(Restrictions.eq("idtaller", idtaller));
         criteria.addOrder(Order.desc("idtaller"));
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         return (CatalogoTaller) criteria.uniqueResult();
