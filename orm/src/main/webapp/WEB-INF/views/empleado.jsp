@@ -53,6 +53,7 @@
                                 </thead>
                                 <tbody id="bodytabla">
                                     <c:forEach items="${lEmpleado}" var="empleado" varStatus="count"> 
+                     
                                         <tr> 
                                             <td id="idempleado" style="display:none">${empleado.idempleado}</td>
                                             <td id="noempleado">${count.count}</td>
