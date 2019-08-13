@@ -44,7 +44,8 @@
                                         <th style="display:none">IDTaller</th>
                                         <th>Taller</th>
                                         <th>Estatus</th>
-                                        <th>Fecha Estatus</th>
+                                        <th>Fecha Entrada</th>
+                                        <th>Fecha Salida</th>
                                         <th>Descripción</th>
                                         <th>Actualizar</th>
                                         <th>Eliminar</th>
@@ -64,7 +65,8 @@
                                             <td style="display:none">${empleado.idtaller.idtaller}</td>
                                             <td>${empleado.idtaller.nombre}</td>
                                             <td>${empleado.estatus}</td>
-                                            <td>${empleado.fechaestatus}</td>
+                                            <td>${empleado.fechaentrada}</td>
+                                            <td>${empleado.fechasalida}</td>
                                             <td>${empleado.descripcion}</td>
                                             <td><button id="mostrarE" onclick="mostrarEmpleado();" data-toggle="modal" data-target="#myModal" class="btn btn-warning">
                                                     <span class="glyphicon glyphicon-pencil"></span> </button></td>
@@ -137,6 +139,9 @@
                             </div>
                             <div class="col-sm-10">
                                 <input type="text"  style="display:none" class="form-control" id="fechaEstatus" >
+                            </div>
+                             <div class="col-sm-10">
+                                <input type="text"  style="display:none" class="form-control" id="fechasalida" >
                             </div>
                         </div>
                         <div class="form-group">
