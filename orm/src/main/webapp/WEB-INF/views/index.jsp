@@ -19,8 +19,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
-        <!--script src="<!c:url value= '/assets/js/jquery-ui.js'/>" type="text/javascript"></script-->
-        <!--link href="<!c:url value='/assets/css/jquery-ui.css'/>" rel="stylesheet" /-->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="Expires" content="0">
         <link href="<c:url value='/assets/css/bootstrap.min.css'/>" rel="stylesheet" />
