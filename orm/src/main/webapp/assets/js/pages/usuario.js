@@ -1,4 +1,4 @@
-$.noConflict();//trabaja diferentes versiones jquery
+//$.noConflict();//trabaja diferentes versiones jquery
 $(document).ready(function () {
 
 });//ready
