@@ -9,8 +9,6 @@ import com.soma.sgc.dao.EmpleadoDao;
 import com.soma.sgc.model.Empleado;
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -57,6 +55,15 @@ public class EmpleadoDaoImpl extends HibernateDao<Integer, Empleado> implements 
         crite.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         return (Empleado) crite.uniqueResult();
         
+    }
+
+    @Override
+    public Empleado busquedaSerie(String serie) {
+        Criteria criteria = creaCriteria();
+        criteria.add(Restrictions.eq("serie", serie));
+        System.out.println(EmpleadoDaoImpl.class + "\nBuscando Serie: " + serie);
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        return (Empleado) criteria.uniqueResult();
     }
     
 }
