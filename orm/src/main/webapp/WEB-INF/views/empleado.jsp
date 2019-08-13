@@ -15,46 +15,61 @@
 <div class="container">   
     <div class="panel-group">
         <div class="panel panel-primary">
-            <div class="panel-heading">Listado de Usuarios</div>
+            <div class="panel-heading">Listado de Empleados</div>
             <div id="contenidoPantalla" class="panel-body">        
                 <div class="row">
                     <div class="form-group">
                         <div class="btn btn-group">
-                            <button id="agregarU" class="btn btn-info" onclick="btnUsuario();" data-toggle="modal" data-target="#myModal"> 
-                                <span class="glyphicon glyphicon-plus"></span>Agregar Usuario</button>
+                            <button id="agregarE" class="btn btn-info" onclick="btnEmpleado();" data-toggle="modal" data-target="#myModal"> 
+                                <span class="glyphicon glyphicon-plus"></span>Agregar Empleado</button>
                         </div>
                         <input type="hidden" name="${_csrf.parameterName}"
                                value="${_csrf.token}" />
                         <input type="text" class="form-control pull-right" style="width:20%" 
-                               id="search" onkeyup="busquedaTbl('tableUsuario');" placeholder="Busqueda">
+                               id="search" onkeyup="busquedaTbl('tableEmpleado');" placeholder="Busqueda">
                     </div>
-                    <!-- Listado de usuarios -->
+                    <!-- Listado de empleados -->
                     <div  class="col-md-12">
                         <div class="table-responsive">
-                            <table id="tableUsuario" class="table table-striped">
+                            <table id="tableEmpleado" class="table table-striped">
                                 <thead>
                                     <tr>                            
                                         <th>No</th>
-                                        <th>Nickname</th>
-                                        <th style="display:none">Password</th>
-                                        <th>Correo Electronico</th>
-                                        <th style="display:none">IDrol</th>
-                                        <th>Rol</th>
-                                        <th style="display:none">IDEstatus</th>
+                                        <th>Serie</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido Paterno</th>
+                                        <th>Apellido Materno</th>
+                                        <th style="display:none">IDPuesto</th>
+                                        <th>Puesto</th>
+                                        <th style="display:none">IDTaller</th>
+                                        <th>Taller</th>
+                                        <th>Estatus</th>
+                                        <th>Fecha Estatus</th>
+                                        <th>Descripción</th>
                                         <th>Actualizar</th>
                                         <th>Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody id="bodytabla">
-                                    <c:forEach items="${lEmpleado}" var="usuario" varStatus="count"> 
-                                        <tr>                               
-                                         
-                                            <td id="nouser">${count.count}</td>
-                                        
-                                            <td><button id="mostrarU" onclick="mostrarUsuario();" data-toggle="modal" data-target="#myModal" class="btn btn-warning">
+                                    <c:forEach items="${lEmpleado}" var="empleado" varStatus="count"> 
+                                        <tr> 
+                                            <td id="idempleado" style="display:none">${empleado.idempleado}</td>
+                                            <td id="noempleado">${count.count}</td>
+                                            <td>${empleado.serie}</td>
+                                            <td>${empleado.nombre}</td>
+                                            <td>${empleado.app}</td>
+                                            <td>${empleado.apm}</td>
+                                            <td style="display:none">${empleado.idpuesto.idpuesto}</td>
+                                            <td>${empleado.idpuesto.puesto}</td>
+                                            <td style="display:none">${empleado.idtaller.idtaller}</td>
+                                            <td>${empleado.idtaller.nombre}</td>
+                                            <td>${empleado.estatus}</td>
+                                            <td>${empleado.fechaestatus}</td>
+                                            <td>${empleado.descripcion}</td>
+                                            <td><button id="mostrarE" onclick="mostrarEmpleado();" data-toggle="modal" data-target="#myModal" class="btn btn-warning">
                                                     <span class="glyphicon glyphicon-pencil"></span> </button></td>
                                             <!-- Eliminar -->
-                                            <td><button id="mostrarU" onclick="eliminarUsuario1();"  class="btn btn-danger">
+                                            <td><button id="eliminarE" onclick="eliminarEmpleado();"  class="btn btn-danger">
                                                     <span class="glyphicon glyphicon-remove"></span> </button></td>
                                         </tr>
                                     </c:forEach>
@@ -76,51 +91,80 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Fomulario para administrar usuarios del sistema</h3>
+                    <h3>Fomulario Para Administrar Empleados Del Sistema</h3>
                 </div>
                 <div class="modal-body">
-                    <!--Formilario para agregar usuario -->
-                    <form class="form-horizontal"  modelAttribute="user" id="frmUsuario">
+                    <!--Formilario para agregar empleados -->
+                    <form class="form-horizontal"  modelAttribute="empleado" id="frmEmpleado">
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="nickname">Nickname:<b style="color: red" title="Campo Requerido">*</b></label>
+                            <label class="control-label col-sm-2" for="nombre">Nombre:<b style="color: red" title="Campo Requerido">*</b></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nick" placeholder="Ingrese alias" onchange="verificarUsuario();"required>
+                                <input type="text" class="form-control" id="nombre" placeholder="Ingrese alias" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="pwd">Password:<b style="color: red" title="Campo Requerido">*</b></label>
+                            <label class="control-label col-sm-2" for="app">Apellido Paterno:<b style="color: red" title="Campo Requerido">*</b></label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="pass" placeholder="Ingrese password" required>
+                                <input type="text" class="form-control" id="app" placeholder="Ingrese Apellido" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="email">Correo:<b style="color: red" title="Campo Requerido">*</b></label>
+                            <label class="control-label col-sm-2" for="apm">Apellido Materno:<b style="color: red" title="Campo Requerido">*</b></label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="email" placeholder="nombredeusuario@nombrededominio.extensión" >
+                                <input type="text" class="form-control" id="apm" placeholder="Ingrese Apellido" >
                             </div>
                         </div>
                         <div class="form-group">
-                            <label  class="control-label col-sm-2">Roles<b style="color: red" title="Campo Requerido">*</b></label>
+                            <label  class="control-label col-sm-2">Estatus:<b style="color: red" title="Campo Requerido">*</b></label>
                             <div class="col-sm-4">
-                                <!-- consulta catalogo -->
-                                <select id="roluser" class="form-control">
-                                    <option value="0">Seleccione rol de usuario</option>
-                                    <c:forEach items="${lRol}" var="rol">
-                                        <option value="${rol.rolid}">${rol.nombre} </option>
+                                <select id="estatus" class="form-control">
+                                    <option value="0">Seleccione...</option>
+                                    <option value="Alta">Alta</option>
+                                    <option value="Baja">Baja</option>
+                                </select>                                            
+                            </div>  
+                            <label class="control-label col-sm-2" for="puesto">Puesto:<b style="color: red" title="Campo Requerido">*</b></label>
+                            <div class="col-sm-4">
+                                <select id="puesto" class="form-control">
+                                    <option value="0">Seleccione...</option>
+                                    <c:forEach items="${lPuesto}" var="puesto">
+                                        <option value="${puesto.idpuesto}">${puesto.puesto}</option>
                                     </c:forEach>
                                 </select>                                            
-                            </div>                                       
+                            </div>  
                             <div class="col-sm-10">
-                                <input type="text"  style="display:none" class="form-control" id="idusuario" >
+                                <input type="text"  style="display:none" class="form-control" id="idEmpleado" >
                             </div>
+                            <div class="col-sm-10">
+                                <input type="text"  style="display:none" class="form-control" id="fechaEstatus" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="serie">Serie:<b style="color: red" title="Campo Requerido">*</b></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="serie" placeholder="Ingrese Serie" >
+                            </div>
+                            <label  class="control-label col-sm-2">Taller:<b style="color: red" title="Campo Requerido">*</b></label>
+                            <div class="col-sm-4">
+                                <select id="IDtaller" class="form-control">
+                                    <option value="0">Seleccione...</option>
+                                    <c:forEach items="${lTaller}" var="taller">
+                                        <option value="${taller.idtaller}">${taller.nombre}</option>
+                                    </c:forEach>
+                                </select>                                            
+                            </div> 
+                        </div>
+                        <div class="form-group">
+                            <label  class="control-label col-sm-2">Descripción:<b style="color: red" title="Campo Requerido">*</b></label>
+                            <textarea rows="4" cols="101" id="descripcion" style="resize: none;"></textarea> 
                         </div>
                     </form> 
                 </div><!--modal body-->
                 <div class="modal-footer">
                     <div class="form-group">
-                        <button id="guardarU" type="button" class="btn btn-success" onclick="agregarUsuario();">Guardar</button>
-                        <button id="actualizarU" onclick="actualizarUsuario();" class="btn btn-primary" >Actualizar</button>
-                        <a id="user" href="<c:url value='/usuario'/>"><button type="button" class="btn btn-default" onclick="limpiarForm('frmUsuario');">Cerrar</button></a>
+                        <button id="guardarE" type="button" class="btn btn-success" onclick="agregarEmpleado();">Guardar</button>
+                        <button id="actualizarE" onclick="actualizarEmpleado();" class="btn btn-primary" >Actualizar</button>
+                        <a id="empleado" href="<c:url value='/empleado'/>"><button type="button" class="btn btn-default" onclick="limpiarForm('frmEmpleado');">Cerrar</button></a>
 
                     </div>
                 </div><!--modal footer-->
