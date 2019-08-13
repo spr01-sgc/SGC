@@ -25,5 +25,7 @@ public interface EmpleadoDao {
     Empleado busquedaId(int idempleado);
 
     Empleado busquedaSerie(String serie);
+    
+    List<Empleado> busquedaEmpleadoPuesto(int puesto);
 
 }
