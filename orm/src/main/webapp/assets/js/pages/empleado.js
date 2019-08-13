@@ -10,6 +10,7 @@ function btnEmpleado() {
 }
 /*Funcion que muestra la informacion de la tabla empleado en el formulario*/
 function mostrarEmpleado() {
+    $("#guardarE").prop("disabled", true);
     $("#agregarE").css("display", "none");//oculta el boton guardar
     $("#actualizarE").prop("disabled", false);//habilita el boton actualizar
     //al dar clic lo que tiene en el renglo lo pase a la caja de texto
@@ -31,9 +32,11 @@ function mostrarEmpleado() {
         $("#IDtaller").val(taller);
         var estatus = $('td', this).eq(10).text();
         $("#estatus").val(estatus);
-        var fechaEstatus = $('td', this).eq(11).text();
-        $("#fechaEstatus").val(fechaEstatus);
-        var descripcion = $('td', this).eq(12).text();
+        var fechaEntrada = $('td', this).eq(11).text();
+        $("#fechaEstatus").val(fechaEntrada);
+         var fechaSalida = $('td', this).eq(12).text();
+        $("#fechaEstatus").val(fechaSalida);
+        var descripcion = $('td', this).eq(13).text();
         $("#descripcion").val(descripcion);
     });
 }
@@ -97,7 +100,7 @@ function agregarEmpleado() {
     var taller = $("#IDtaller").val();
     var descripcion = $("#descripcion").val();
 
-    if (nombre === '' || app === '' || apm === '' || serie === '') {
+    if (nombre === '' || app === '' || apm === '' || serie === '' || descripcion === '') {
         alertify.error("Hay campos vacios");
         return false;
     }
