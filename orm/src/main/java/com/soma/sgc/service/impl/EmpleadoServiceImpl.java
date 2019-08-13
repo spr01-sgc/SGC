@@ -51,5 +51,10 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     public Empleado busquedaId(int idempleado) {
        return empleadoDao.busquedaId(idempleado);
     }
+
+    @Override
+    public Empleado busquedaSerie(String serie) {
+        return empleadoDao.busquedaSerie(serie);
+    }
     
 }
