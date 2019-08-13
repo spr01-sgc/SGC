@@ -111,8 +111,8 @@ public class ControllerEmpleado {
             empleado.setSerie(datos[5]);
             empleado.setIdtaller(lTaller);
             empleado.setDescripcion(datos[7]);
-            empleado.setFechaestatus(fecha);
-
+            empleado.setFechaentrada(fecha);
+            
             if (empleadoService.save(empleado)) {
                 return "exito";
             } else {
@@ -144,8 +144,6 @@ public class ControllerEmpleado {
                 for (Empleado empleado : lEmpleado) {
                     if (empleado.getIdempleado() == Integer.parseInt(datos[8])) {
 
-                        Date fecha = new Date();
-
                         CatalogoPuestos lPuesto = puestosService.mostrarNombre(Integer.parseInt(datos[4]));
                         CatalogoTaller lTaller = tallerService.mostrarNombre(Integer.parseInt(datos[6]));
                         //Se llena el modelo
@@ -157,9 +155,13 @@ public class ControllerEmpleado {
                         empleado.setSerie(datos[5]);
                         empleado.setIdtaller(lTaller);
                         empleado.setDescripcion(datos[7]);
-                        empleado.setFechaestatus(fecha);
-
-                        if (empleadoService.save(empleado)) {
+                        
+                        if(datos[3].equalsIgnoreCase("Baja")){
+                            Date fecha = new Date();
+                            empleado.setFechasalida(fecha);
+                        }
+                        
+                        if (empleadoService.update(empleado)) {
                             return "exito";
                         } else {
                             return "error";
