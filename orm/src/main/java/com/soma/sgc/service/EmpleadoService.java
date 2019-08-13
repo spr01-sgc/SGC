@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.soma.sgc.service;
+
 import com.soma.sgc.model.Empleado;
 import java.util.List;
 
@@ -12,11 +13,17 @@ import java.util.List;
  * @author HASANI
  */
 public interface EmpleadoService {
-           boolean save(Empleado empleado);
+
+    boolean save(Empleado empleado);
+
     boolean update(Empleado empleado);
+
     boolean delete(int idempleado);
 
     List<Empleado> showEmpleado();
+
     Empleado busquedaId(int idempleado);
     
+    Empleado busquedaSerie(String serie);
+
 }
