@@ -45,7 +45,7 @@ public class Empleado implements Serializable {
     private String serie;
 
     @Column(name = "estatus")
-    private Integer estatus;
+    private String estatus;
 
     @Column(name = "fechaestatus")
     private Date fechaestatus;
@@ -117,11 +117,11 @@ public class Empleado implements Serializable {
         this.serie = serie;
     }
 
-    public Integer getEstatus() {
+    public String getEstatus() {
         return estatus;
     }
 
-    public void setEstatus(Integer estatus) {
+    public void setEstatus(String estatus) {
         this.estatus = estatus;
     }
 
